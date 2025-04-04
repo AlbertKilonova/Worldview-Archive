@@ -1,0 +1,405 @@
+/* 全局样式 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth; /* 平滑滚动 */
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #0a0a0a;
+  color: #e0e0e0;
+  overflow-x: hidden;
+}
+
+/* 星空背景 */
+#starCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: -1;
+}
+
+/* 顶部导航栏 */
+.header {
+  background: rgba(20, 20, 40, 0.9);
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 2000; /* 确保在最上层 */
+}
+
+.header h1 {
+  color: #a0a0e0;
+  margin: 0 auto;
+  transition: text-shadow 0.3s ease-in-out;
+}
+
+/* 文字光晕动画 */
+.header h1:hover {
+  text-shadow: 0 0 15px #a0a0ff;
+}
+
+.menu-toggle {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #a0a0e0;
+  cursor: pointer;
+}
+
+/* 侧边栏 */
+.sidebar {
+  width: 240px;
+  background: rgba(30, 30, 60, 0.95);
+  backdrop-filter: blur(10px);
+  height: 100vh;
+  position: fixed;
+  left: -260px;
+  transition: left 0.5s ease-in-out;
+  padding-top: 70px;
+  z-index: 1500; /* 低于标题栏 */
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 20px;
+}
+
+.sidebar ul li {
+  margin: 15px 0;
+}
+
+.sidebar ul li a {
+  color: #a0a0e0;
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+  transition: background 0.3s, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+/* 悬停特效 */
+.sidebar ul li a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(5px);
+  box-shadow: 5px 5px 15px rgba(160, 160, 255, 0.4);
+}
+
+/* 侧边栏展开 */
+.sidebar.open {
+  left: 0;
+}
+
+/* 主内容 */
+.content {
+  padding: 120px 20px;
+  max-width: 900px;
+  margin: auto;
+  transition: margin-left 0.5s ease-in-out;
+}
+
+/* 侧边栏展开时调整主内容 */
+@media (min-width: 1024px) {
+  .sidebar {
+    left: 0;
+  }
+
+  .content {
+    margin-left: 240px;
+  }
+}
+
+/* 板块样式 - 更通透的毛玻璃 */
+.window {
+  scroll-margin-top: 80px;
+  background: rgba(20, 20, 50, 0.4); /* 更透明的背景 */
+  backdrop-filter: blur(15px); /* 更强的毛玻璃效果 */
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  margin-bottom: 20px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* 进入视口时，渐入动画 */
+.window.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 悬停时的炫光动画 */
+.window:hover {
+  box-shadow: 0 0 25px rgba(160, 160, 255, 0.7);
+  transform: scale(1.03);
+}
+#starCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: -1;
+}
+
+.header {
+  background: rgba(20, 20, 40, 0.9);
+  padding: 15px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+}
+
+.menu-toggle {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #a0a0ff;
+  cursor: pointer;
+}
+
+.sidebar {
+  width: 240px;
+  background: rgba(30, 30, 60, 0.95);
+  backdrop-filter: blur(10px);
+  position: fixed;
+  left: -240px;
+  height: 100vh;
+  transition: left 0.3s;
+  padding-top: 70px;
+}
+
+.sidebar.open { left: 0; }
+
+.content {
+  padding: 120px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.window {
+  background: rgba(20, 20, 50, 0.4);
+  backdrop-filter: blur(15px);
+  padding: 25px;
+  border-radius: 16px;
+  margin: 20px 0;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: 0.6s ease;
+}
+
+.window.show {
+  opacity: 1;
+  transform: none;
+}
+
+.timelines-container {
+  display: grid;
+  gap: 40px;
+  margin-top: 30px;
+}
+
+.timeline-wrapper {
+  background: rgba(30, 30, 60, 0.3);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.timeline-container {
+  position: relative;
+  height: 200px;
+  overflow-x: auto;
+  padding: 30px 0;
+}
+
+.timeline-scale {
+  height: 2px;
+  background: linear-gradient(90deg, 
+    rgba(0,0,0,0) 0%, 
+    rgba(100,200,255,0.8) 50%, 
+    rgba(0,0,0,0) 100%);
+  margin-bottom: 40px;
+}
+
+.timeline-track {
+  position: relative;
+  height: 120px;
+}
+
+.timeline-item {
+  position: absolute;
+  width: 180px;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: 0.5s ease;
+}
+
+.timeline-item.show { opacity: 1; }
+
+.timeline-event {
+  background: rgba(50, 50, 90, 0.7);
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  transition: 0.3s ease;
+}
+
+.timeline-year {
+  color: #00ffff;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.marker {
+  position: absolute;
+  height: 10px;
+  width: 2px;
+  background: rgba(255,255,255,0.5);
+  bottom: -5px;
+}
+
+.major-marker {
+  height: 20px;
+  width: 3px;
+  background: #00ffff;
+}
+
+.announcement-box {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  overflow: hidden;
+}
+
+.announcement-item {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  opacity: 0;
+  transition: 0.5s ease;
+}
+
+.announcement-item.active {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .content { padding: 100px 15px; }
+  .timeline-item { width: 140px; }
+  .announcement-box { width: 80%; }
+}
+
+/* 板块 - 毛玻璃 */
+.window {
+  scroll-margin-top: 90px;
+  background: rgba(20, 20, 50, 0.4);
+  backdrop-filter: blur(15px);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  margin-bottom: 20px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+}
+/* 响应式优化 - 追加内容 */
+@media (max-width: 768px) {
+  .content {
+    padding: 100px 15px;
+  }
+  
+  .window {
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+  
+  .timeline-item {
+    width: 120px;
+    margin-right: 15px;
+  }
+}
+
+/* 时间轴容器 */
+.timeline-container {
+  position: relative;
+  width: 100%;
+  margin: 30px 0;
+  overflow-x: auto;
+}
+
+/* 时间轴刻度线 */
+.timeline-scale {
+  position: relative;
+  height: 2px;
+  background: linear-gradient(90deg, 
+              rgba(0,0,0,0) 0%, 
+              rgba(100,200,255,0.8) 50%, 
+              rgba(0,0,0,0) 100%);
+  margin-bottom: 40px;
+}
+
+/* 时间轴轨道 */
+.timeline-track {
+  position: relative;
+  min-height: 100px;
+}
+
+/* 时间轴项目 */
+.timeline-item {
+  position: absolute;
+  width: 150px;
+  background: rgba(40, 40, 80, 0.6);
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.timeline-item.show {
+  opacity: 1;
+}
+
+/* 刻度标记 */
+.timeline-scale .marker {
+  position: absolute;
+  height: 10px;
+  width: 2px;
+  background: rgba(255,255,255,0.7);
+  bottom: -5px;
+  transform: translateX(-50%);
+}
+
+.timeline-scale .major-marker {
+  height: 20px;
+  width: 3px;
+  background: cyan;
+  bottom: -10px;
+}
+
+.timeline-scale .major-marker::after {
+  content: attr(data-year);
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: 12px;
+  white-space: nowrap;
+}

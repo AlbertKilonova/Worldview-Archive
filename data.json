@@ -1,0 +1,78 @@
+{
+  "sections": [
+    {
+      "id": "announcement",
+      "title": "公告",
+      "content": "建站中，暂无"
+    },
+    {
+      "id": "worldview",
+      "title": "简介",
+      "content": "世界之外"
+    },
+    {
+      "id": "timeline",
+      "title": "时间轴",
+      "timelines": [
+        {
+          "name": "公元纪年",
+          "unit": "年",
+          "events": [
+            {"year": "2000", "event": "暂无"},
+            {"year": "2100", "event": "暂无"},
+            {"year": "2200", "event": "暂无"}
+          ],
+          "config": {
+            "minYear": 1900,
+            "maxYear": 2300,
+            "scaleInterval": 50,
+            "majorScaleInterval": 100
+          }
+        },
+        {
+          "name": "新元纪年",
+          "unit": "年",
+          "events": [
+            {"year": "N-0", "event": "暂无"},
+            {"year": "N-150", "event": "暂无"},
+            {"year": "N-300", "event": "暂无"}
+          ],
+          "config": {
+            "minYear": "N-0",
+            "maxYear": "N-200",
+            "scaleInterval": 10,
+            "majorScaleInterval": 50
+          }
+        }
+      ]
+    },
+    {
+      "id": "factions",
+      "title": "势力介绍",
+      "content": "建站中，暂无"
+    },
+    {
+      "id": "regions",
+      "title": "地区介绍",
+      "content": "建站中，暂无"
+    },
+    {
+      "id": "species",
+      "title": "种族介绍",
+      "content": "建站中，暂无"
+    },
+    {
+      "id": "concepts",
+      "title": "概念",
+      "content": "建站中，暂无"
+    },
+    {
+      "id": "more",
+      "title": "其他",
+      "content": "暂无！"
+    }
+  ],
+  "announcement": [
+    "公告"
+]
+}

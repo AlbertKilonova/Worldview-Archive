@@ -12,36 +12,36 @@
     },
     {
       "id": "timeline",
-      "title": "时间轴",
+      "title": "时间线",
       "timelines": [
         {
           "name": "公元纪年",
           "unit": "年",
           "events": [
-            {"year": "2000", "event": "暂无"},
-            {"year": "2100", "event": "暂无"},
-            {"year": "2200", "event": "暂无"}
+            {"year": "2050", "event": "暂无", "detail": "暂无..."},
+            {"year": "2100", "event": "暂无", "detail": "暂无..."},
+            {"year": "2200", "event": "暂无", "detail": "暂无..."}
           ],
           "config": {
-            "minYear": 1900,
+            "minYear": 2000,
             "maxYear": 2300,
-            "scaleInterval": 50,
-            "majorScaleInterval": 100
+            "scaleInterval": "auto",
+            "majorScaleInterval": "auto"
           }
         },
         {
-          "name": "新元纪年",
+          "name": "星元纪年",
           "unit": "年",
           "events": [
-            {"year": "N-0", "event": "暂无"},
-            {"year": "N-150", "event": "暂无"},
-            {"year": "N-300", "event": "暂无"}
+            {"year": "N-120", "event": "暂无", "detail": "暂无..."},
+            {"year": "N-150", "event": "暂无", "detail": "暂无..."},
+            {"year": "N-180", "event": "暂无", "detail": "暂无..."}
           ],
           "config": {
-            "minYear": "N-0",
+            "minYear": "N-100",
             "maxYear": "N-200",
-            "scaleInterval": 10,
-            "majorScaleInterval": 50
+            "scaleInterval": "auto",
+            "majorScaleInterval": "auto"
           }
         }
       ]

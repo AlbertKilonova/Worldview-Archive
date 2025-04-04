@@ -2,22 +2,31 @@ const canvas = document.getElementById("starCanvas");
 const ctx = canvas.getContext("2d");
 
 let stars = [];
-const numStars = 150;
+let lastTime = 0;
+const frameRate = 30;
+const frameInterval = 1000 / frameRate;
 
 // 初始化星星
 function initStars() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  stars = [];
-
-  for (let i = 0; i < numStars; i++) {
-    stars.push({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      radius: Math.random() * 2,
-      speed: Math.random() * 0.5 + 0.2
-    });
-  }
+  const maxWidth = 1920;
+  const maxHeight = 1080;
+  
+  canvas.width = Math.min(window.innerWidth, maxWidth);
+  canvas.height = Math.min(window.innerHeight, maxHeight);
+  
+  // 根据屏幕尺寸调整星星密度
+  const baseDensity = 150 / (maxWidth * maxHeight);
+  const adjustedNumStars = Math.min(
+    Math.floor(baseDensity * canvas.width * canvas.height),
+    300
+  );
+  
+  stars = Array.from({length: adjustedNumStars}, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    radius: Math.random() * 1.5 + 0.5,
+    speed: Math.random() * 0.5 + 0.2
+  }));
 }
 
 // 绘制星星
@@ -43,50 +52,26 @@ function updateStars() {
   });
 }
 
-// 在animateStars函数前添加帧率控制
-let lastTime = 0;
-const frameRate = 30; // 目标帧率
-const frameInterval = 1000 / frameRate;
-
+// 动画循环
 function animateStars(timestamp) {
-  if (timestamp - lastTime > frameInterval) {
+  if (!lastTime) lastTime = timestamp;
+  const delta = timestamp - lastTime;
+  
+  if (delta > frameInterval) {
     updateStars();
     drawStars();
-    lastTime = timestamp;
+    lastTime = timestamp - (delta % frameInterval);
   }
+  
   requestAnimationFrame(animateStars);
 }
 
-// 修改initStars以优化大屏幕性能
-function initStars() {
-  canvas.width = Math.min(window.innerWidth, 1920); // 限制最大宽度
-  canvas.height = Math.min(window.innerHeight, 1080); // 限制最大高度
-  
-  // 根据屏幕大小调整星星数量
-  const density = (canvas.width * canvas.height) / (1920 * 1080);
-  const adjustedNumStars = Math.min(numStars * density, 300);
-  
-  stars = [];
-  for (let i = 0; i < adjustedNumStars; i++) {
-    stars.push({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      radius: Math.random() * 2,
-      speed: Math.random() * 0.5 + 0.2
-    });
-  }
-}
-
-// 动画循环
-function animateStars() {
-  updateStars();
-  drawStars();
-  requestAnimationFrame(animateStars);
-}
-
-// 监听窗口变化，调整画布
-window.addEventListener("resize", initStars);
-
-// 初始化并启动动画
+// 初始化并启动
 initStars();
 animateStars();
+
+// 响应式调整
+window.addEventListener("resize", debounce(() => {
+  initStars();
+  drawStars();
+}, 200));
